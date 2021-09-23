@@ -72,19 +72,23 @@ const TestForm = ({ handeler }) => {
    const dataContext = useContext(DataContext)
    const { getSchemas, testsSchema } = dataContext
 
-   useEffect(() => getSchemas(), [])
+   
+   const [testData,setTestData] = useState(handeler.testData)
+   const [selectController,setSelectController] = useState(false)
 
-   const [testData,setTestData] = useState({
-      testName: '',
-      params: []
-   })
+   useEffect(() => {
+      getSchemas()
+   }, [])
 
    const getPickedParams = () => testsSchema.filter(schema => schema.testName === testData.testName)[0].params
+
    useEffect(() => {
-      if(testData.testName !== '') {
+      if(testData.testName !== '' && selectController) {
          setTestData({ ...testData, params: getPickedParams() })
+         setSelectController(false)
       }
    }, [testData.testName])
+
    const handleParamChange = e => {
       const arr = testData.params
       const changedArrr = arr.map(element => {
@@ -96,8 +100,17 @@ const TestForm = ({ handeler }) => {
       setTestData({ ...testData,params:changedArrr})
    }
 
-   const handleSubmit = e => {}
-   const handleSelectChange = e => setTestData({ ...testData, testName : e.target.value })
+   const handleSubmit = e => {
+      e.preventDefault()
+      if( testData.testName !== '') {
+         handeler.setTestData(testData)
+         handeler.moveForward()
+      }
+   }
+   const handleSelectChange = e => {
+      setTestData({ ...testData, testName : e.target.value })
+      setSelectController(true)
+   }
 
    const classes = useStyles()
 
@@ -107,7 +120,7 @@ const TestForm = ({ handeler }) => {
             <Heading text='Dane Testow' />
             <form
                className='standardForm'
-               id='dataForm'
+               id='testForm'
                onSubmit={ handleSubmit }   
             >
                <FormControl fullWidth className={ classes.select }>
@@ -153,8 +166,9 @@ const TestForm = ({ handeler }) => {
             <Button
                variant='contained'
                color='primary'
+               type='sumbit'
+               form='testForm'
                className={ classes.btnForward }
-               onClick={ handeler.moveForward }
             >Dalej</Button>
          </Container>
       </Container>

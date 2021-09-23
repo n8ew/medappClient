@@ -4,7 +4,6 @@ import Heading from './Heading'
 
 import TextField from "@material-ui/core/TextField"
 import Container from "@material-ui/core/Container"
-import Typography from "@material-ui/core/Typography"
 import FormControl from "@material-ui/core/FormControl"
 import InputLabel from "@material-ui/core/InputLabel"
 import Select from "@material-ui/core/Select"
@@ -54,11 +53,7 @@ const useStyles = makeStyles({
 
 const PersonalForm = ({ handeler }) => {
 
-   const [personalData, setPersonalData] = useState({
-      wiek: '',
-      waga: '',
-      plec: ''
-   })
+   const [personalData, setPersonalData] = useState( handeler.personalData )
 
    const handleChange = e => setPersonalData({ ...personalData, [e.target.name] : e.target.value })
 

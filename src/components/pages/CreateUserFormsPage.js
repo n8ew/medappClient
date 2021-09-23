@@ -20,17 +20,26 @@ const useStyles = makeStyles({
    },
 })
 
-const CreateUserFormsPage = () => {
+const CreateUserFormsPage = ({ setAppData }) => {
 
    const [data,setData] = useState({
-      personalData: {},
-      testData: {}
+      personalData: {
+         wiek: '',
+         waga: '',
+         plec: ''
+      },
+      testData: {
+         testName: '',
+         params: []
+      }
    })
    const [currentNumber, setCurrentNumber] = useState(0)
 
    const handleComponents = {
-      setPersonalData: data => setData({ ...data, personaldata: data }),
-      setTestData: data => setData({ ...data, testData: data }),
+      personalData : data.personalData,
+      testData : data.testData,
+      setPersonalData: input => setData({ ...data, personalData: input }),
+      setTestData: input => setData({ ...data, testData: input }),
       moveForward: () => setCurrentNumber(currentNumber + 1),
       moveBack: () => setCurrentNumber(currentNumber - 1)
    }
@@ -38,7 +47,7 @@ const CreateUserFormsPage = () => {
    const components = [
    <PersonalForm handeler={ handleComponents }/>,
    <TestForm handeler={ handleComponents } />,
-   <SummaryForm handeler={ handleComponents } />
+   <SummaryForm handeler={ handleComponents } sendDataToApp={ setAppData } />
    ]
 
    const classes = useStyles()

@@ -1,4 +1,4 @@
-import { SET_LOADING, GET_TESTS_SCHEMAS } from '../types'
+import { SET_LOADING, GET_TESTS_SCHEMAS, GET_TEST_NORMS } from '../types'
 
 export default (state, action) => {
    switch (action.type) {
@@ -11,6 +11,12 @@ export default (state, action) => {
          return {
             ...state,
             testsSchema: action.payload,
+            loading: false
+         }
+      case GET_TEST_NORMS:
+         return {
+            ...state,
+            norms: action.payload,
             loading: false
          }
       default:

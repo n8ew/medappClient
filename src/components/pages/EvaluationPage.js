@@ -45,6 +45,16 @@ const useStyles = makeStyles({
    },
    btn: {
       height: 75
+   },
+   recomendationsHolder: {
+      paddingBottom: 30
+   },
+   recomendationsHeader: {
+      marginBottom: 20
+   },
+   rekomendation: {
+      marginBottom: 15,
+      textDecoration: 'underline'
    }
 })
 

@@ -2,14 +2,16 @@ import React, { useReducer } from 'react'
 import axios from 'axios'
 import DataContext from './dataContext'
 import DataReducer from './dataReducer'
-import { SET_LOADING, GET_TESTS_SCHEMAS, GET_TEST_NORMS } from '../types'
+import { SET_LOADING, GET_TESTS_SCHEMAS, GET_TEST_NORMS, GET_TEST } from '../types'
+import { StarRate } from '@material-ui/icons'
 
 const DataProvider = props => {
 
    const initialState = {
       loading: false,
       testsSchema: [],
-      norms: {}
+      norms: {},
+      test: {}
    }
 
    const [state,dispatch] = useReducer(DataReducer, initialState)
@@ -75,14 +77,23 @@ const DataProvider = props => {
          payload: dispatchData(inputData)
       })
    }
-
+   const getTest = async(id) => {
+      setLoading()
+      const res = await axios.get(`/api/v1/docs/${id}`)
+      dispatch({
+         type: GET_TEST,
+         payload: res.data
+      })
+   }
 
    return (
       <DataContext.Provider value={{ 
          testsSchema: state.testsSchema,
          norms: state.norms,
+         test: state.test,
          getSchemas,
-         getNormsForTest
+         getNormsForTest,
+         getTest
       }}>
          { props.children }
       </DataContext.Provider>

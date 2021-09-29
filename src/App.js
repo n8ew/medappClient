@@ -8,6 +8,7 @@ import CreateUserPage from './components/pages/CreateUserPage';
 import QRCodeReaderPage from './components/pages/QRCodeReaderPage';
 import CreateUserFormsPage from './components/pages/CreateUserFormsPage';
 import EvaluationPage from './components/pages/EvaluationPage';
+import QRPersonalDataPage from './components/pages/QRPersonalDataPage';
 
 import './App.css';
 
@@ -36,6 +37,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={ HomePage } />
             <Route exact path='/qrreader' component={ QRCodeReaderPage } />
+            <Route exact path='/qrPersonalData' component={ QRPersonalDataPage } />
             <Route exact path='/createUser' component={ CreateUserPage } />
             <Route exact path='/forms' render={() => <CreateUserFormsPage setAppData={setUserData} />} />
             <Route exact path='/evaluation' render={ () =>  <EvaluationPage userData={ userData } /> } />

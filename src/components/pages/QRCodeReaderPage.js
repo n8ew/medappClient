@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react'
 import DataContext from '../../context/data/dataContext'
 import Heading from '../createUsersFormsComponents/Heading'
+import ScanResponse from '../QrCodeComponents/ScanResponse'
 
 import QrReader from 'react-qr-scanner'
 import ClipLoader from "react-spinners/ClipLoader"
+import { useHistory } from 'react-router-dom'
 
 import Container from "@material-ui/core/Container"
 import Typography from "@material-ui/core/Typography"
@@ -11,6 +13,8 @@ import Typography from "@material-ui/core/Typography"
 import { makeStyles } from '@material-ui/core'
 
 const QRCodeReaderPage = () => {
+
+   const history = useHistory()
 
    const dataContext = useContext(DataContext)
    const { getTest, test } = dataContext
@@ -29,13 +33,39 @@ const QRCodeReaderPage = () => {
    const handleQRError = error => console.log(error)
    const handleQRScan = data => {
       if(data) {
-         setScan(data.text)
+         const scanRes = data.text
+         setScan(scanRes)
          setLoading(true)
+         getTest(scanRes)
       }
    }
 
+   const [success,setSuccess] = useState(false)
 
-   useEffect(() => console.log(test), [test])
+   useEffect(() => {
+      if(test.msg === 'success') {
+         return setSuccess(true)
+      } else {
+         return setSuccess(false)
+      }
+   }, [test])
+
+   let responseHendeler
+   if(success) {
+      responseHendeler = {
+         txt: 'Skan zakonczony powodzeniem',
+         btnColor: 'primary',
+         btnTxt: 'przejdz dalej',
+         action: () => history.push('/qrPersonalData')
+      }
+   } else {
+      responseHendeler = {
+         txt: 'Skan nie powiodl sie',
+         btnColor: 'secondary',
+         btnTxt: 'sprobuj ponownie',
+         action: () => setScan('')
+      }
+   }
 
    const classes = useStyles()
 
@@ -43,16 +73,16 @@ const QRCodeReaderPage = () => {
       <Container className={ classes.page }>
          <Container className={ classes.content }>
             <Heading text='Zeskanuj swoj kod QR' />
-            <QrReader
-               delay='300'
-               style={{ width: '80%'}}
-               onError={handleQRError}
-               onScan={handleQRScan}
-               />
-            { loading && (
-               <ClipLoader loading={loading} size={35} />
-            )}
-            {scan !== '' && (<Typography>{scan}</Typography>)}
+            { scan === '' && <QrReader
+            delay='300'
+            style={{ width: '80%'}}
+            onError={handleQRError}
+            onScan={handleQRScan}
+            /> }
+         </Container>
+         <Container className={ classes.scanResHolder }>
+            { loading && <ClipLoader loading={loading} color={'blue'} size={45} /> }
+            { scan !== '' && !loading && (<ScanResponse handeler={ responseHendeler } />)}
          </Container>
       </Container>
    )
@@ -71,11 +101,21 @@ const useStyles = makeStyles({
       padding: 0,
       margin: 0,
       width: '100vw',
-      minHeight: '70vh',
       borderTopLeftRadius: 80,
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center'
+      alignItems: 'center',
+   },
+   scanResHolder: {
+      padding: 0,
+      margin: 0,
+      marginTop: 50,
+      width: '100vw',
+      borderTopLeftRadius: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center'
    },
 })
 

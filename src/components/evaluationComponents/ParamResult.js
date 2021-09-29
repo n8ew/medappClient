@@ -12,11 +12,16 @@ import { makeStyles } from '@material-ui/core'
 const useStyles = makeStyles({
    holder: {
       display: 'flex',
+      flexDirection: 'column',
       padding: 10,
       borderStyle: 'solid',
       borderWidth: '1px',
       marginBottom: 20,
       borderRadius: 10
+   },
+   container: {
+      display: 'flex',
+
    },
    textHolder: {
       display: 'flex',
@@ -24,6 +29,14 @@ const useStyles = makeStyles({
    },
    label: {
       marginRight: 20
+   },
+   resHolder: {
+      marginLeft: 17,
+   },
+   resTxt: {
+      fontWeight: 'bold',
+      fontStyle: 'italic',
+      color: '#333'
    },
    popupHolder: {
       background: "#ccc",
@@ -37,7 +50,7 @@ const useStyles = makeStyles({
    }
 })
 
-const ParamResult = ({ data }) => {
+const ParamResult = ({ data, show }) => {
 
    const dataContext = useContext(DataContext)
    const { norms } = dataContext
@@ -52,19 +65,25 @@ const ParamResult = ({ data }) => {
          }
       }
    },[norms])
-
+   
    const [color,setColor] = useState({
       border: 'grey',
       background: 'inherit'
    })
 
+   // Recomendation msg
+   const [msg,setMsg] = useState('')
+
    useEffect(() => {
       if(norm.normMax < data.value ) {
          setColor({ border: 'red', background: 'rgba(255,0,0,.1)'})
+         setMsg(norm.toHighMed)
       } else if (norm.normMin > data.value) {
          setColor({ border: 'blue', background: 'rgba(0,0,255,0.1)'})
+         setMsg(norm.toLowMed)
       } else {
          setColor({ border: 'green', background: 'rgba(0,255,0,.1'})
+         setMsg('')
       }
    },[norm])
 
@@ -78,15 +97,22 @@ const ParamResult = ({ data }) => {
 
    return (
       <Container className={ classes.holder } style={{ borderColor: color.border, background: color.background }}>
-         <Container className={ classes.textHolder }>
-            <Typography className={ classes.label }>{ data.key } :</Typography>
-            <Typography>{ data.value }</Typography>
+         <Container className={ classes.container }>
+            <Container className={ classes.textHolder }>
+               <Typography className={ classes.label }>{ data.key } :</Typography>
+               <Typography>{ data.value }</Typography>
+            </Container>
+            <Button
+               onClick={ handleBtn }
+            >
+               <HelpOutlineIcon/>
+            </Button>
          </Container>
-         <Button
-            onClick={ handleBtn }
-         >
-            <HelpOutlineIcon/>
-         </Button>
+         {show && (
+            <Container className={ classes.resHolder }>
+               { msg !== '' && <Typography className={ classes.resTxt }>{ msg }</Typography>}
+            </Container>
+         )}
          <Popover
             open={ open }
             anchorEl={ anchorEle }

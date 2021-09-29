@@ -65,6 +65,8 @@ const EvaluationPage = ({ userData }) => {
 
    useEffect(() => getNormsForTest(userData), [])
 
+   const [showRec,setShowRec] = useState(false)
+
    const classes = useStyles()
 
    return (
@@ -80,7 +82,7 @@ const EvaluationPage = ({ userData }) => {
             </Typography>
             <Container className={ classes.paramsHolder }>
                { userData.testData.params.map((param,index) => {
-                  return (<ParamResult data={ param } key={ index } />)
+                  return (<ParamResult data={ param } show={ showRec } key={ index } />)
                }) }
             </Container>
          </Container>
@@ -89,6 +91,7 @@ const EvaluationPage = ({ userData }) => {
                   variant='contained'
                   color='primary'
                   className={ classes.btn }
+                  onClick={ () => setShowRec(!showRec) }
                >
                   Zobacz rekomendacje
                </Button>

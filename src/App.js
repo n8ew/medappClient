@@ -29,6 +29,9 @@ function App() {
     }
   })
 
+  const setupTestData = testData => setUserData({ ...userData, testData: testData })
+  const setPersonalData = personalData => setUserData({ ...userData, personalData: personalData })
+
   return (
     <DataProvider>
       <div className="App">
@@ -36,11 +39,11 @@ function App() {
         <NavBar/>
           <Switch>
             <Route exact path='/' component={ HomePage } />
-            <Route exact path='/qrreader' component={ QRCodeReaderPage } />
-            <Route exact path='/qrPersonalData' component={ QRPersonalDataPage } />
-            <Route exact path='/createUser' component={ CreateUserPage } />
-            <Route exact path='/forms' render={() => <CreateUserFormsPage setAppData={setUserData} />} />
-            <Route exact path='/evaluation' render={ () =>  <EvaluationPage userData={ userData } /> } />
+            <Route path='/qrreader' render={() => <QRCodeReaderPage setupTestData={ setupTestData } />} />
+            <Route path='/qrPersonalData' render={() => <QRPersonalDataPage personalData={ userData.personalData } setPersonalData={ setPersonalData } /> } />
+            <Route path='/createUser' component={ CreateUserPage } />
+            <Route path='/forms' render={() => <CreateUserFormsPage setAppData={setUserData} />} />
+            <Route path='/evaluation' render={ () =>  <EvaluationPage userData={ userData } /> } />
           </Switch>
         </Router>
       </div>

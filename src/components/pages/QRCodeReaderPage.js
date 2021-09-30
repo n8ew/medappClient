@@ -8,11 +8,10 @@ import ClipLoader from "react-spinners/ClipLoader"
 import { useHistory } from 'react-router-dom'
 
 import Container from "@material-ui/core/Container"
-import Typography from "@material-ui/core/Typography"
 
 import { makeStyles } from '@material-ui/core'
 
-const QRCodeReaderPage = () => {
+const QRCodeReaderPage = ({ setupTestData }) => {
 
    const history = useHistory()
 
@@ -44,6 +43,11 @@ const QRCodeReaderPage = () => {
 
    useEffect(() => {
       if(test.msg === 'success') {
+         const testRes = {
+            testName: test.doc.testName,
+            params: test.doc.params
+         }
+         setupTestData(testRes)
          return setSuccess(true)
       } else {
          return setSuccess(false)

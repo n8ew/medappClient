@@ -26,7 +26,7 @@ const useStyles = makeStyles({
       marginBottom: 10
    },
    label: {
-      width: 70,
+      width: 90,
       marginRight: 10
    }
 })

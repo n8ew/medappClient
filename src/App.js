@@ -29,10 +29,10 @@ function App() {
       plec:""
     },
     testData: {
-      testName: "test3",
+      testName: "",
       params: [
-        { key: "param8", value: 0 },
-        { key: "param9", value: 0 },
+        { key: "", value: 0 },
+        { key: "", value: 0 },
       ]
     }
   })

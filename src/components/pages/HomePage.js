@@ -56,7 +56,7 @@ const HomePage = () => {
    return (
       <Container className={ classes.homePage }>
          <Container className={ classes.heading }>
-            <Heading text='Czy posiadasz kod QR?' />
+            <Heading text='Czy posiadasz kod QR ?' />
          </Container>
          <Container className={ classes.content }>
             <Button

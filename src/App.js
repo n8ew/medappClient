@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import DataProvider from './context/data/dataProvider'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import { createTheme, ThemeProvider } from '@material-ui/core';
+
 import NavBar from './components/NavBar';
 import HomePage from './components/pages/HomePage';
 import CreateUserPage from './components/pages/CreateUserPage';
@@ -12,15 +14,19 @@ import QRPersonalDataPage from './components/pages/QRPersonalDataPage';
 
 import './App.css';
 
-function App() {
+const theme = createTheme({
+  typography: {
+    fontFamily: "Nunito, sans-serif"
+  }
+})
 
-  // THIS IS TEST
+function App() {
 
   const [userData,setUserData] = useState({
     personalData: {
-      wiek:2,
-      waga:1,
-      plec:"mezczyzna"
+      wiek:'',
+      waga:'',
+      plec:""
     },
     testData: {
       testName: "test3",
@@ -36,19 +42,21 @@ function App() {
 
   return (
     <DataProvider>
-      <div className="App">
-        <Router>
-        <NavBar/>
-          <Switch>
-            <Route exact path='/' component={ HomePage } />
-            <Route path='/qrreader' render={() => <QRCodeReaderPage setupTestData={ setupTestData } />} />
-            <Route path='/qrPersonalData' render={() => <QRPersonalDataPage personalData={ userData.personalData } setPersonalData={ setPersonalData } /> } />
-            <Route path='/createUser' component={ CreateUserPage } />
-            <Route path='/forms' render={() => <CreateUserFormsPage setAppData={setUserData} />} />
-            <Route path='/evaluation' render={ () =>  <EvaluationPage userData={ userData } /> } />
-          </Switch>
-        </Router>
-      </div>
+      <ThemeProvider theme={ theme }>
+        <div className="App">
+          <Router>
+          <NavBar/>
+            <Switch>
+              <Route exact path='/' component={ HomePage } />
+              <Route path='/qrreader' render={() => <QRCodeReaderPage setupTestData={ setupTestData } />} />
+              <Route path='/qrPersonalData' render={() => <QRPersonalDataPage personalData={ userData.personalData } setPersonalData={ setPersonalData } /> } />
+              <Route path='/createUser' component={ CreateUserPage } />
+              <Route path='/forms' render={() => <CreateUserFormsPage setAppData={setUserData} />} />
+              <Route path='/evaluation' render={ () =>  <EvaluationPage userData={ userData } /> } />
+            </Switch>
+          </Router>
+        </div>
+      </ThemeProvider>
     </DataProvider>
   );
 }

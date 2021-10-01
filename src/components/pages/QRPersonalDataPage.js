@@ -14,7 +14,7 @@ const useStyles = makeStyles({
         width: '100vw',
         minHeight: '90vh',
         borderTopLeftRadius: 80,
-        background: "#eee"
+        background: "#fff"
     },
     content: {
         padding: 0,

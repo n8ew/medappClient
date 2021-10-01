@@ -15,7 +15,7 @@ const useStyles = makeStyles({
       width: '100vw',
       minHeight: '90vh',
       maxHeight: '90vh',
-      background: '#eee',
+      background: '#fff',
       borderTopLeftRadius: 80,
    },
 })

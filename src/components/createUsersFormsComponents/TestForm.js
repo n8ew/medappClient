@@ -27,7 +27,7 @@ const useStyles = makeStyles({
       padding: 0,
       margin: 0,
       width: '100vw',
-      minHeight: '70vh',
+      // minHeight: '70vh',
       maxHeight: '70vh',
       borderTopLeftRadius: 80,
       display: 'flex',
@@ -57,13 +57,15 @@ const useStyles = makeStyles({
       marginRight: 25
    },
    btnBack: {
-      width: 125,
+      width: 175,
       height: 50,
-      marginRight: 25
+      fontWeight: 300,
+      marginRight: 10
    },
    btnForward: {
-      width: 125,
-      height: 50
+      width: 175,
+      height: 50,
+      fontWeight: 300,
    }
 })
 

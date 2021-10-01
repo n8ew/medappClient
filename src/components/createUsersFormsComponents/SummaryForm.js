@@ -18,7 +18,7 @@ const useStyles = makeStyles({
       width: '100vw',
       minHeight: '90vh',
       borderTopLeftRadius: 80,
-      background: '#eee'
+      background: '#fff'
    },
    content: {
       padding: 0,
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
    btns: {
       padding: 0,
       margin: 0,
-      marginTop: 20,
+      marginTop: 10,
       width: '100vw',
       minHeight: '20vh',
       maxHeight: '20vh',
@@ -42,13 +42,15 @@ const useStyles = makeStyles({
       alignItems: 'center'
    },
    btnForward: {
-      width: 125,
-      height: 50
+      width: 175,
+      height: 50,
+      fontWeight: 300,
    },
    btnBack: {
-      width: 125,
+      width: 175,
       height: 50,
-      marginRight: 25
+      marginRight: 10,
+      fontWeight: 300
    },
 })
 

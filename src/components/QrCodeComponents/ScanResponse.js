@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     holder: {
         padding: 0,
         margin: 0,
-        marginTop: 50,
+        // marginTop: 30,
         width: '100vw',
         borderTopLeftRadius: 80,
         display: 'flex',
@@ -19,7 +19,13 @@ const useStyles = makeStyles({
         justifyContent: 'center'
     },
     txt: {
-        marginBottom: 50
+        marginBottom: 50,
+        fontWeight: 300
+    },
+    btn: {
+        width: 175,
+        height: 50,
+        fontWeight: 300
     }
 })
 

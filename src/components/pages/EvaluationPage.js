@@ -18,7 +18,7 @@ const useStyles = makeStyles({
       width: '100vw',
       minHeight: '90vh',
       borderTopLeftRadius: 80,
-      background: "#eee"
+      background: "#fff"
    },
    loadingHolder: {
       display: 'flex',
@@ -39,6 +39,7 @@ const useStyles = makeStyles({
       borderTopLeftRadius: 80,
       display: 'flex',
       flexDirection: 'column',
+      alignItems: 'center'
    },
    testLabel: {
       marginLeft: 20,
@@ -56,7 +57,9 @@ const useStyles = makeStyles({
       justifyContent: 'center'
    },
    btn: {
-      height: 75
+      width: 200,
+      height: 75,
+      fontWeight: 300
    },
    recomendationsHolder: {
       paddingBottom: 30
@@ -104,7 +107,7 @@ const EvaluationPage = ({ userData }) => {
                      component='h6'
                      className={ classes.testLabel }
                   >
-                     { userData.testData.testName } :
+                     { userData.testData.testName }:
                   </Typography>
                   <Container className={ classes.paramsHolder }>
                      { userData.testData.params.map((param,index) => {

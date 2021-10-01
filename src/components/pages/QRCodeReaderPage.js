@@ -57,16 +57,16 @@ const QRCodeReaderPage = ({ setupTestData }) => {
    let responseHendeler
    if(success) {
       responseHendeler = {
-         txt: 'Skan zakonczony powodzeniem',
+         txt: 'Skan zakonczońy powodzeniem',
          btnColor: 'primary',
-         btnTxt: 'przejdz dalej',
+         btnTxt: 'przejdź dalej',
          action: () => history.push('/qrPersonalData')
       }
    } else {
       responseHendeler = {
-         txt: 'Skan nie powiodl sie',
+         txt: 'Skan nie powiodł się',
          btnColor: 'secondary',
-         btnTxt: 'sprobuj ponownie',
+         btnTxt: 'spróbuj ponownie',
          action: () => setScan('')
       }
    }
@@ -79,13 +79,13 @@ const QRCodeReaderPage = ({ setupTestData }) => {
             <Heading text='Zeskanuj swoj kod QR' />
             { scan === '' && <QrReader
             delay='300'
-            style={{ width: '80%'}}
+            style={{ width: '300px', marginTop: '50px' }}
             onError={handleQRError}
             onScan={handleQRScan}
             /> }
          </Container>
          <Container className={ classes.scanResHolder }>
-            { loading && <ClipLoader loading={loading} color={'blue'} size={45} /> }
+            { loading && <ClipLoader loading={loading} color={'blue'} size={60} /> }
             { scan !== '' && !loading && (<ScanResponse handeler={ responseHendeler } />)}
          </Container>
       </Container>
@@ -99,7 +99,7 @@ const useStyles = makeStyles({
       width: '100vw',
       minHeight: '90vh',
       borderTopLeftRadius: 80,
-      background: "#eee"
+      background: "#fff"
    },
    content: {
       padding: 0,

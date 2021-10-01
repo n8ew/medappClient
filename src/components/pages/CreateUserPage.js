@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import Heading from '../createUsersFormsComponents/Heading'
 
-import Typography from "@material-ui/core/Typography"
 import Container from "@material-ui/core/Container"
 import Button from "@material-ui/core/Button"
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
       width: '100vw',
       minHeight: '90vh',
       maxHeight: '90vh',
-      background: '#eee',
+      background: '#fff',
       borderTopLeftRadius: 80,
       display: 'flex',
       flexDirection: 'column',
@@ -25,8 +25,10 @@ const useStyles = makeStyles({
       maxWidth: '60vw'
    },
    btn: {
-      marginTop: 75,
-      height: 50
+      marginTop: 50,
+      height: 50,
+      width: 175,
+      fontWeight: 300
    }
 })
 
@@ -40,14 +42,7 @@ const CreateUserPage = () => {
 
    return (
       <Container className={ classes.page }>
-        <Typography
-         className={ classes.heading }
-         variant='h5'
-         component='h5'
-         align='center'
-        >
-           Coś tam coś tamCoś tam coś tam
-        </Typography>
+        <Heading text='Po kliknięciu dalej wprowadź wymagane informacje' />
         <Button
          variant='contained'
          color='primary'

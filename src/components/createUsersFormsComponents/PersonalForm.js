@@ -25,7 +25,6 @@ const useStyles = makeStyles({
       padding: 0,
       margin: 0,
       width: '100vw',
-      minHeight: '70vh',
       maxHeight: '70vh',
       borderTopLeftRadius: 80,
       display: 'flex',
@@ -38,6 +37,7 @@ const useStyles = makeStyles({
    btns: {
       padding: 0,
       margin: 0,
+      marginTop: 20,
       width: '100vw',
       minHeight: '20vh',
       maxHeight: '20vh',
@@ -46,8 +46,9 @@ const useStyles = makeStyles({
       alignItems: 'center'
    },
    btnForward: {
-      width: 125,
-      height: 50
+      width: 175,
+      height: 50,
+      fontWeight: 300
    }
 })
 

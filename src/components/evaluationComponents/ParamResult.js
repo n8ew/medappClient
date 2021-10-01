@@ -99,7 +99,7 @@ const ParamResult = ({ data, show }) => {
       <Container className={ classes.holder } style={{ borderColor: color.border, background: color.background }}>
          <Container className={ classes.container }>
             <Container className={ classes.textHolder }>
-               <Typography className={ classes.label }>{ data.key } :</Typography>
+               <Typography className={ classes.label }>{ data.key }:</Typography>
                <Typography>{ data.value }</Typography>
             </Container>
             <Button

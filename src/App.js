@@ -12,6 +12,8 @@ import QRPersonalDataPage from './components/pages/QRPersonalDataPage';
 
 import './App.css';
 
+// GIT TEST
+
 function App() {
 
   const [userData,setUserData] = useState({

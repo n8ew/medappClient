@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import ScreenContext from '../../context/screenSize/screenContext'
 
 import Heading from './Heading'
 
@@ -13,7 +14,7 @@ import Button from "@material-ui/core/Button"
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
-   page: {
+   pageXs: {
       padding: 0,
       margin: 0,
       width: '100vw',
@@ -21,10 +22,26 @@ const useStyles = makeStyles({
       maxHeight: '90vh',
       borderTopLeftRadius: 80,
    },
+   pageMd: {
+      padding: 0,
+      margin: 0,
+      width: '80vw',
+      minHeight: '90vh',
+      maxHeight: '90vh',
+      borderTopLeftRadius: 80,
+   },
+   pageLg: {
+      padding: 0,
+      margin: 0,
+      width: '40vw',
+      minHeight: '90vh',
+      maxHeight: '90vh',
+      borderTopLeftRadius: 80,
+   },
    content: {
       padding: 0,
       margin: 0,
-      width: '100vw',
+      width: '100%',
       maxHeight: '70vh',
       borderTopLeftRadius: 80,
       display: 'flex',
@@ -38,7 +55,7 @@ const useStyles = makeStyles({
       padding: 0,
       margin: 0,
       marginTop: 20,
-      width: '100vw',
+      width: '100%',
       minHeight: '20vh',
       maxHeight: '20vh',
       display: 'flex',
@@ -53,6 +70,9 @@ const useStyles = makeStyles({
 })
 
 const PersonalForm = ({ handeler }) => {
+
+   const screenContext = useContext(ScreenContext)
+   const { screen } = screenContext
 
    const [personalData, setPersonalData] = useState( handeler.personalData )
 
@@ -69,7 +89,7 @@ const PersonalForm = ({ handeler }) => {
    const classes = useStyles()
 
    return (
-      <Container className={ classes.page }>
+      <Container className={ screen === 'xs' ? classes.pageXs : (screen === 'sm' ? classes.pageMd : classes.pageLg) }>
          <Container className={ classes.content }>
             <Heading text='Dane Osobiste' />
             <form className='standardForm' id='personalForm' onSubmit={ handleSubmit }>

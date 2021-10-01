@@ -8,7 +8,8 @@ const useStyles = makeStyles({
    heading: {
       marginTop: 75,
       marginBottom: 30,
-      fontWeight: 400
+      fontWeight: 400,
+      maxWidth: 400
    },
 })
 

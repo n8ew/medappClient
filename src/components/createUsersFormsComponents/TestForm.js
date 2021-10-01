@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import DataContext from '../../context/data/dataContext'
+import ScreenContext from '../../context/screenSize/screenContext'
 
 import Heading from './Heading'
 
@@ -23,10 +24,26 @@ const useStyles = makeStyles({
       maxHeight: '90vh',
       borderTopLeftRadius: 80,
    },
+   pageMd: {
+      padding: 0,
+      margin: 0,
+      width: '80vw',
+      minHeight: '90vh',
+      maxHeight: '90vh',
+      borderTopLeftRadius: 80,
+   },
+   pageLg: {
+      padding: 0,
+      margin: 0,
+      width: '40vw',
+      minHeight: '90vh',
+      maxHeight: '90vh',
+      borderTopLeftRadius: 80,
+   },
    content: {
       padding: 0,
       margin: 0,
-      width: '100vw',
+      width: '100%',
       // minHeight: '70vh',
       maxHeight: '70vh',
       borderTopLeftRadius: 80,
@@ -37,7 +54,7 @@ const useStyles = makeStyles({
    btns: {
       padding: 0,
       margin: 0,
-      width: '100vw',
+      width: '100%',
       minHeight: '20vh',
       maxHeight: '20vh',
       display: 'flex',
@@ -51,7 +68,7 @@ const useStyles = makeStyles({
       marginTop: 15,
       display: 'flex',
       flexDirection: 'row',
-      alignItems: 'center'
+      alignItems: 'center',
    },
    label: {
       marginRight: 25
@@ -74,7 +91,9 @@ const TestForm = ({ handeler }) => {
    const dataContext = useContext(DataContext)
    const { getSchemas, testsSchema } = dataContext
 
-   
+   const screenContext = useContext(ScreenContext)
+   const { screen } = screenContext
+
    const [testData,setTestData] = useState(handeler.testData)
    const [selectController,setSelectController] = useState(false)
 
@@ -117,7 +136,7 @@ const TestForm = ({ handeler }) => {
    const classes = useStyles()
 
    return (
-      <Container className={ classes.page }>
+      <Container className={ screen === 'xs' ? classes.pageXs : (screen === 'sm' ? classes.pageMd : classes.pageLg) }>
          <Container className={ classes.content }>
             <Heading text='Dane Testow' />
             <form

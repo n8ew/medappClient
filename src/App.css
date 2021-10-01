@@ -5,6 +5,11 @@
 body {
   background-color: #3f51b5;
 }
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 nav {
   background-color: inherit;
   min-height: 10vh;

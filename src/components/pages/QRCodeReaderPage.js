@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import DataContext from '../../context/data/dataContext'
+import ScreenContext from '../../context/screenSize/screenContext'
 import Heading from '../createUsersFormsComponents/Heading'
 import ScanResponse from '../QrCodeComponents/ScanResponse'
 
@@ -17,6 +18,9 @@ const QRCodeReaderPage = ({ setupTestData }) => {
 
    const dataContext = useContext(DataContext)
    const { getTest, test } = dataContext
+
+   const screenContext = useContext(ScreenContext)
+   const { screen } = screenContext
 
    // Spinner stuff
    const [loading,setLoading] = useState(false)
@@ -74,7 +78,7 @@ const QRCodeReaderPage = ({ setupTestData }) => {
    const classes = useStyles()
 
    return (
-      <Container className={ classes.page }>
+      <Container className={ screen === 'xs' ? classes.pageXs : (screen === 'sm' ? classes.pageMd : classes.pageLg) }>
          <Container className={ classes.content }>
             <Heading text='Zeskanuj swoj kod QR' />
             { scan === '' && <QrReader
@@ -93,18 +97,44 @@ const QRCodeReaderPage = ({ setupTestData }) => {
 }
 
 const useStyles = makeStyles({
-   page: {
+   pageXs: {
       padding: 0,
       margin: 0,
       width: '100vw',
       minHeight: '90vh',
+      background: '#fff',
       borderTopLeftRadius: 80,
-      background: "#fff"
+   },
+   pageMd: {
+      padding: 0,
+      margin: 0,
+      width: '80vw',
+      minHeight: '90vh',
+      background: '#fff',
+      borderTopLeftRadius: 80,
+      borderTopRightRadius: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: "4px 4px 8px rgba(0,0,0,.3), -4px -4px 8px rgba(0,0,0,.3) "
+   },
+   pageLg: {
+      padding: 0,
+      margin: 0,
+      width: '40vw',
+      minHeight: '90vh',
+      background: '#fff',
+      borderTopLeftRadius: 80,
+      borderTopRightRadius: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: "4px 4px 8px rgba(0,0,0,.3), -4px -4px 8px rgba(0,0,0,.3) "
    },
    content: {
       padding: 0,
       margin: 0,
-      width: '100vw',
+      width: '100%',
       borderTopLeftRadius: 80,
       display: 'flex',
       flexDirection: 'column',

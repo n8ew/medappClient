@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import DataContext from '../../context/data/dataContext'
+import ScreenContext from '../../context/screenSize/screenContext'
 
 import Heading from '../createUsersFormsComponents/Heading'
 import ParamResult from '../evaluationComponents/ParamResult'
@@ -12,13 +13,39 @@ import Typography from "@material-ui/core/Typography"
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
-   page: {
+   pageXs: {
       padding: 0,
       margin: 0,
       width: '100vw',
       minHeight: '90vh',
+      background: '#fff',
       borderTopLeftRadius: 80,
-      background: "#fff"
+   },
+   pageMd: {
+      padding: 0,
+      margin: 0,
+      width: '80vw',
+      minHeight: '90vh',
+      background: '#fff',
+      borderTopLeftRadius: 80,
+      borderTopRightRadius: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: "4px 4px 8px rgba(0,0,0,.3), -4px -4px 8px rgba(0,0,0,.3) "
+   },
+   pageLg: {
+      padding: 0,
+      margin: 0,
+      width: '40vw',
+      minHeight: '90vh',
+      background: '#fff',
+      borderTopLeftRadius: 80,
+      borderTopRightRadius: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: "4px 4px 8px rgba(0,0,0,.3), -4px -4px 8px rgba(0,0,0,.3) "
    },
    loadingHolder: {
       display: 'flex',
@@ -34,7 +61,7 @@ const useStyles = makeStyles({
    content: {
       padding: 0,
       margin: 0,
-      width: '100vw',
+      width: '100%',
       minHeight: '70vh',
       borderTopLeftRadius: 80,
       display: 'flex',
@@ -78,6 +105,9 @@ const EvaluationPage = ({ userData }) => {
    const dataContext = useContext(DataContext)
    const { norms, getNormsForTest } = dataContext
 
+   const screenContext = useContext(ScreenContext)
+   const { screen } = screenContext
+
    const [loading,setLoading] = useState(true)
 
    useEffect(() => {
@@ -90,7 +120,7 @@ const EvaluationPage = ({ userData }) => {
    const classes = useStyles()
 
    return (
-      <Container className={ classes.page }>
+      <Container className={ screen === 'xs' ? classes.pageXs : (screen === 'sm' ? classes.pageMd : classes.pageLg) }>
          { loading ? (
             <Container className={ classes.loadingHolder }>
                <Heading text='Prosze czekac'/>

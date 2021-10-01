@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import ScreenProvider from './context/screenSize/screenProvider'
 
 ReactDOM.render(
-  <App />
+  <ScreenProvider>
+    <App />
+  </ScreenProvider>
   ,
   document.getElementById('root')
 );

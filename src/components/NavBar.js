@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Logo from '../logo/Logo'
 import { useLocation, useHistory } from 'react-router-dom'
 
 import Typography from "@material-ui/core/Typography"
@@ -17,7 +18,6 @@ const NavBar = () => {
    const [isHomePage, setIsHomePage] = useState()
 
    const location = useLocation()
-   const history = useHistory()
 
    useEffect(() => {
       if( location.pathname === '/') {
@@ -25,21 +25,14 @@ const NavBar = () => {
       }
       return setIsHomePage(false)
    }, [location.pathname])
-
+   
    const classes = useStyles()
+
+
 
    return (
       <nav>
-         <Typography
-            className={ isHomePage ? classes.logo : classes.activeLogo }
-            onClick={ () => {
-               if(!isHomePage) {
-                  history.push('/')
-               }
-            }}
-         >
-            MeddAppLOGO
-         </Typography>
+         <Logo isHomePage={ isHomePage } />
       </nav>
    )
 }

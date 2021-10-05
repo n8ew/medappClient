@@ -6,8 +6,10 @@ import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
    heading: {
-      marginTop: 50,
-      marginBottom: 40
+      marginTop: 75,
+      marginBottom: 30,
+      fontWeight: 400,
+      maxWidth: 400
    },
 })
 

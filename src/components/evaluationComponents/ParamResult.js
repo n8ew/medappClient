@@ -34,7 +34,7 @@ const useStyles = makeStyles({
       marginLeft: 17,
    },
    resTxt: {
-      fontWeight: 'bold',
+      fontWeight: '300',
       fontStyle: 'italic',
       color: '#333'
    },
@@ -77,13 +77,13 @@ const ParamResult = ({ data, show }) => {
    useEffect(() => {
       if(norm.normMax < data.value ) {
          setColor({ border: 'red', background: 'rgba(255,0,0,.1)'})
-         setMsg(norm.toHighMed)
+         setMsg('Żeby obniżyć wynik rekomendujemy ' + norm.toHighMed)
       } else if (norm.normMin > data.value) {
          setColor({ border: 'blue', background: 'rgba(0,0,255,0.1)'})
-         setMsg(norm.toLowMed)
+         setMsg('Żeby podnieść wynik rekomendujemy ' + norm.toLowMed)
       } else {
          setColor({ border: 'green', background: 'rgba(0,255,0,.1'})
-         setMsg('')
+         setMsg('Twój wynik jest w normie')
       }
    },[norm])
 
@@ -99,7 +99,7 @@ const ParamResult = ({ data, show }) => {
       <Container className={ classes.holder } style={{ borderColor: color.border, background: color.background }}>
          <Container className={ classes.container }>
             <Container className={ classes.textHolder }>
-               <Typography className={ classes.label }>{ data.key } :</Typography>
+               <Typography className={ classes.label }>{ data.key }:</Typography>
                <Typography>{ data.value }</Typography>
             </Container>
             <Button

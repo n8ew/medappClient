@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import ScreenContext from '../../context/screenSize/screenContext'
 
 import { useHistory } from 'react-router-dom'
 
@@ -12,18 +13,31 @@ import Button from "@material-ui/core/Button"
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
-   page: {
+   pageXs: {
       padding: 0,
       margin: 0,
       width: '100vw',
       minHeight: '90vh',
       borderTopLeftRadius: 80,
-      background: '#eee'
+   },
+   pageMd: {
+      padding: 0,
+      margin: 0,
+      width: '80vw',
+      minHeight: '90vh',
+      borderTopLeftRadius: 80,
+   },
+   pageLg: {
+      padding: 0,
+      margin: 0,
+      width: '40vw',
+      minHeight: '90vh',
+      borderTopLeftRadius: 80,
    },
    content: {
       padding: 0,
       margin: 0,
-      width: '100vw',
+      width: '100%',
       minHeight: '70vh',
       borderTopLeftRadius: 80,
       display: 'flex',
@@ -33,8 +47,8 @@ const useStyles = makeStyles({
    btns: {
       padding: 0,
       margin: 0,
-      marginTop: 20,
-      width: '100vw',
+      marginTop: 10,
+      width: '100%',
       minHeight: '20vh',
       maxHeight: '20vh',
       display: 'flex',
@@ -42,17 +56,22 @@ const useStyles = makeStyles({
       alignItems: 'center'
    },
    btnForward: {
-      width: 125,
-      height: 50
+      width: 175,
+      height: 50,
+      fontWeight: 300,
    },
    btnBack: {
-      width: 125,
+      width: 175,
       height: 50,
-      marginRight: 25
+      marginRight: 10,
+      fontWeight: 300
    },
 })
 
 const SummaryFrom = ({ handeler, sendDataToApp }) => {
+
+   const screenContext = useContext(ScreenContext)
+   const { screen } = screenContext
 
    const history = useHistory()
 
@@ -68,7 +87,7 @@ const SummaryFrom = ({ handeler, sendDataToApp }) => {
    const classes = useStyles()
 
    return (
-      <Container className={ classes.page }>
+      <Container className={ screen === 'xs' ? classes.pageXs : (screen === 'sm' ? classes.pageMd : classes.pageLg) }>
          <Container className={ classes.content }>
             <Heading text='Podsumowanie' />
             <PersonalSummary data={ handeler.personalData } />

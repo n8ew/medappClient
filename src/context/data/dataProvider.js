@@ -3,7 +3,6 @@ import axios from 'axios'
 import DataContext from './dataContext'
 import DataReducer from './dataReducer'
 import { SET_LOADING, GET_TESTS_SCHEMAS, GET_TEST_NORMS, GET_TEST } from '../types'
-import { StarRate } from '@material-ui/icons'
 
 const DataProvider = props => {
 

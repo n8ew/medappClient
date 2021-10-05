@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import DataContext from '../../context/data/dataContext'
+import ScreenContext from '../../context/screenSize/screenContext'
 import Heading from '../createUsersFormsComponents/Heading'
 import ScanResponse from '../QrCodeComponents/ScanResponse'
 
@@ -17,6 +18,9 @@ const QRCodeReaderPage = ({ setupTestData }) => {
 
    const dataContext = useContext(DataContext)
    const { getTest, test } = dataContext
+
+   const screenContext = useContext(ScreenContext)
+   const { screen } = screenContext
 
    // Spinner stuff
    const [loading,setLoading] = useState(false)
@@ -57,16 +61,16 @@ const QRCodeReaderPage = ({ setupTestData }) => {
    let responseHendeler
    if(success) {
       responseHendeler = {
-         txt: 'Skan zakonczony powodzeniem',
+         txt: 'Skan zakonczońy powodzeniem',
          btnColor: 'primary',
-         btnTxt: 'przejdz dalej',
+         btnTxt: 'przejdź dalej',
          action: () => history.push('/qrPersonalData')
       }
    } else {
       responseHendeler = {
-         txt: 'Skan nie powiodl sie',
+         txt: 'Skan nie powiodł się',
          btnColor: 'secondary',
-         btnTxt: 'sprobuj ponownie',
+         btnTxt: 'spróbuj ponownie',
          action: () => setScan('')
       }
    }
@@ -74,18 +78,18 @@ const QRCodeReaderPage = ({ setupTestData }) => {
    const classes = useStyles()
 
    return (
-      <Container className={ classes.page }>
+      <Container className={ screen === 'xs' ? classes.pageXs : (screen === 'sm' ? classes.pageMd : classes.pageLg) }>
          <Container className={ classes.content }>
             <Heading text='Zeskanuj swoj kod QR' />
             { scan === '' && <QrReader
             delay='300'
-            style={{ width: '80%'}}
+            style={{ width: '300px', marginTop: '50px' }}
             onError={handleQRError}
             onScan={handleQRScan}
             /> }
          </Container>
          <Container className={ classes.scanResHolder }>
-            { loading && <ClipLoader loading={loading} color={'blue'} size={45} /> }
+            { loading && <ClipLoader loading={loading} color={'blue'} size={60} /> }
             { scan !== '' && !loading && (<ScanResponse handeler={ responseHendeler } />)}
          </Container>
       </Container>
@@ -93,18 +97,44 @@ const QRCodeReaderPage = ({ setupTestData }) => {
 }
 
 const useStyles = makeStyles({
-   page: {
+   pageXs: {
       padding: 0,
       margin: 0,
       width: '100vw',
       minHeight: '90vh',
+      background: '#fff',
       borderTopLeftRadius: 80,
-      background: "#eee"
+   },
+   pageMd: {
+      padding: 0,
+      margin: 0,
+      width: '80vw',
+      minHeight: '90vh',
+      background: '#fff',
+      borderTopLeftRadius: 80,
+      borderTopRightRadius: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: "4px 4px 8px rgba(0,0,0,.3), -4px -4px 8px rgba(0,0,0,.3) "
+   },
+   pageLg: {
+      padding: 0,
+      margin: 0,
+      width: '40vw',
+      minHeight: '90vh',
+      background: '#fff',
+      borderTopLeftRadius: 80,
+      borderTopRightRadius: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: "4px 4px 8px rgba(0,0,0,.3), -4px -4px 8px rgba(0,0,0,.3) "
    },
    content: {
       padding: 0,
       margin: 0,
-      width: '100vw',
+      width: '100%',
       borderTopLeftRadius: 80,
       display: 'flex',
       flexDirection: 'column',

@@ -8,18 +8,23 @@ import { makeStyles } from '@material-ui/core'
 const useStyles = makeStyles({
    container: {
       padding: 0,
-      paddingLeft: 40,
       paddingTop: 40,
       margin: 0,
+      marginTop: 20,
       marginBottom: 20,
       borderTop: '2px solid #ddd',
-      borderTopLeftRadius: 80
+      borderTopLeftRadius: 80,
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'column'
    },
    heading: {
       marginBottom: 20
    },
    row: {
       display: 'flex',
+      alignItems: 'center',
+      width: 300,
       marginBottom: 10
    },
    label: {

@@ -6,6 +6,8 @@ import { SET_LOADING, GET_TESTS_SCHEMAS, GET_TEST_NORMS, GET_TEST } from '../typ
 
 const DataProvider = props => {
 
+   const url = 'https://medd-app-server.herokuapp.com'
+
    const initialState = {
       loading: false,
       testsSchema: [],
@@ -21,7 +23,7 @@ const DataProvider = props => {
    // get tests schemas
    const getSchemas = async () => {
       setLoading()
-      const res = await axios.get('/api/v1/testsSchema')
+      const res = await axios.get(`${ url }/api/v1/testsSchema`)
       dispatch({
          type: GET_TESTS_SCHEMAS,
          payload: res.data.tests
@@ -30,7 +32,7 @@ const DataProvider = props => {
    const getNormsForTest = async(data) => {
       setLoading()
       const testName = data.testData.testName
-      const res = await axios.get(`/api/v1/norms/${testName}`)
+      const res = await axios.get(`${ url } /api/v1/norms/${testName}`)
 
       // set wiek
       const wiekInput = data.personalData.wiek
@@ -78,7 +80,7 @@ const DataProvider = props => {
    }
    const getTest = async(id) => {
       setLoading()
-      const res = await axios.get(`/api/v1/docs/${id}`)
+      const res = await axios.get(`${ url }/api/v1/docs/${ id }`)
       dispatch({
          type: GET_TEST,
          payload: res.data

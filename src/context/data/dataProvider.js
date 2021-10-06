@@ -32,7 +32,7 @@ const DataProvider = props => {
    const getNormsForTest = async(data) => {
       setLoading()
       const testName = data.testData.testName
-      const res = await axios.get(`${ url } /api/v1/norms/${testName}`)
+      const res = await axios.get(`${ url }/api/v1/norms/${testName}`)
 
       // set wiek
       const wiekInput = data.personalData.wiek

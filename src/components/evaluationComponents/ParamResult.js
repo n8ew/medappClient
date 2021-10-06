@@ -39,7 +39,7 @@ const useStyles = makeStyles({
       color: '#333'
    },
    popupHolder: {
-      background: "#ccc",
+      background: "#FFF9B2",
       padding: 20,
       border: '1px solid #aaa'
    },
